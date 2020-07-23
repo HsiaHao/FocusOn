@@ -7,10 +7,11 @@
 //
 
 import UIKit
-
+import CoreData
 class TimerViewController: UIViewController {
 
-    var itemArray = ["Swift", "LeetCode", "English Interview"]
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var itemArray = [UserItem]()
     var minutes = 30
     var seconds = 0
     var timerEnable = false
@@ -18,16 +19,19 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var itemPicker: UIPickerView!
     @IBOutlet weak var timerButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
-    
+    let time = Data()
     var timer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("time \(time)")
+        loadItems()
         self.itemPicker.dataSource = self
         self.itemPicker.delegate = self
         let timeString = String(format: "%02d : %02d", minutes, seconds )// 007
         //let timeString = "\(minutes) : \(seconds)"
         timeLabel.text = timeString
+        print(itemArray)
 
     }
     
@@ -50,13 +54,14 @@ class TimerViewController: UIViewController {
         var textField = UITextField()
         let alert = UIAlertController(title: "Add New Focus Item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-            //when press add item
-            //print("successful")
-            var newItem = ""
-            
-            newItem = textField.text!
+
+            let newItem = UserItem(context: self.context)
+            //print(textField.text)
+            newItem.name = textField.text
+            newItem.minutes = 0
+            newItem.seconds = 0
             self.itemArray.append(newItem)
-            self.itemPicker.reloadAllComponents()
+            self.saveItems()
             
         }
         alert.addTextField { (alertTextField) in
@@ -79,6 +84,27 @@ class TimerViewController: UIViewController {
             timer.invalidate()
             timerEnable = false
         }
+    }
+    
+    //MARK: - CoreData Methods
+    func saveItems() {
+        do{
+            try context.save()
+        }catch{
+            print("Error saving context \(error)")
+        }
+        itemPicker.reloadAllComponents()
+    }
+    
+    func loadItems(){
+        let request : NSFetchRequest<UserItem> = UserItem.fetchRequest()
+        
+        do{
+            itemArray = try context.fetch(request)
+        }catch{
+            print("Error fetching data from context: \(error)")
+        }
+        itemPicker.reloadAllComponents()
     }
     
 }
@@ -105,12 +131,11 @@ extension TimerViewController: UIPickerViewDelegate, UIPickerViewDataSource{
         }else{
             label = UILabel()
         }
-        
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont(name: "Helvetica", size: 25)
-        label.text = itemArray[row]
-        
+        label.text = itemArray[row].name
+        //print(itemArray[row].name)
         return label
     }
 }

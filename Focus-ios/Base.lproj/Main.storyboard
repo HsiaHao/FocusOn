@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Timer View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="TimerViewController" customModule="FocusApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvW-YX-HjP">
+                                <rect key="frame" x="0.0" y="44" width="414" height="216"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="uFZ-gj-0jo"/>
+                                </constraints>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 : 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="700-cC-pYQ">
+                                <rect key="frame" x="0.0" y="310" width="414" height="145"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="145" id="SWt-bu-uai"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baR-0o-gY7">
+                                <rect key="frame" x="157" y="662.5" width="100" height="99"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="sC2-A3-KSz"/>
+                                    <constraint firstAttribute="width" constant="100" id="sTt-Y1-gnq"/>
+                                </constraints>
+                                <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <state key="normal" title="Start" backgroundImage="circle" catalog="system">
+                                    <color key="titleColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="timeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cp1-CL-s3D"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Yh-4J-7o8">
+                                <rect key="frame" x="364" y="262.5" width="50" height="45.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="BOc-30-NaN" userLabel="height = 20"/>
+                                    <constraint firstAttribute="width" constant="50" id="MXu-Na-Rx5" userLabel="width = 20"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" backgroundImage="pencil" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="addItemButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mxW-km-fFf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="tvW-YX-HjP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="3vf-gx-upe"/>
+                            <constraint firstItem="700-cC-pYQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7c1-jg-CKv"/>
+                            <constraint firstItem="4Yh-4J-7o8" firstAttribute="top" secondItem="tvW-YX-HjP" secondAttribute="bottom" id="I1U-F2-uOp"/>
+                            <constraint firstItem="tvW-YX-HjP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Mfx-TF-1Xp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="baR-0o-gY7" secondAttribute="bottom" constant="100" id="Pok-LG-Ojl"/>
+                            <constraint firstItem="4Yh-4J-7o8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="VGd-H4-fN6"/>
+                            <constraint firstItem="700-cC-pYQ" firstAttribute="top" secondItem="4Yh-4J-7o8" secondAttribute="bottom" id="WWY-sM-ovU"/>
+                            <constraint firstItem="baR-0o-gY7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Zic-5K-Nug"/>
+                            <constraint firstItem="tvW-YX-HjP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aAZ-Yn-Qf0"/>
+                            <constraint firstItem="700-cC-pYQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="iC8-hA-aw0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="itemPicker" destination="tvW-YX-HjP" id="yPk-au-r7G"/>
+                        <outlet property="timeLabel" destination="700-cC-pYQ" id="TKU-bT-o2c"/>
+                        <outlet property="timerButton" destination="baR-0o-gY7" id="7rV-DD-69u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="120.53571428571428"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="circle" catalog="system" width="128" height="121"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
+    </resources>
+</document>
