@@ -10,63 +10,48 @@ import UIKit
 import CoreData
 class TimerViewController: UIViewController {
 
+    let calendar = Calendar.current
+    var clickedDate = Date()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var itemArray = [UserItem]()
-    var minutes = 30
-    var seconds = 0
     var timerEnable = false
+    var textField = UITextField()
+    var setTime = TimePeriod()
     
     @IBOutlet weak var itemPicker: UIPickerView!
     @IBOutlet weak var timerButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
-    let time = Data()
+    
     var timer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("time \(time)")
+        setTime.minutes = 25
+        setTime.seconds = 0
         loadItems()
         self.itemPicker.dataSource = self
         self.itemPicker.delegate = self
-        let timeString = String(format: "%02d : %02d", minutes, seconds )// 007
-        //let timeString = "\(minutes) : \(seconds)"
-        timeLabel.text = timeString
-        print(itemArray)
-
     }
     
-    @objc func updateUI()
-    {
-        if minutes > 0 && seconds == 0{
-            minutes -= 1
-            seconds = 59
-        }else if seconds > 0{
-            seconds -= 1
-        }else if minutes == 0 && seconds == 0{
-            timer.invalidate()
-            print("Time Out")
-        }
-        let timeString = String(format: "%02d : %02d", minutes, seconds)
-        timeLabel.text = timeString
+    @IBAction func addClicked(_ sender: UIButton) {
+    }
+    @IBAction func minusClicked(_ sender: UIButton) {
     }
     //MARK: - add Items
     @IBAction func addItemButtonPressed(_ sender: UIButton) {
-        var textField = UITextField()
+       
         let alert = UIAlertController(title: "Add New Focus Item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-
             let newItem = UserItem(context: self.context)
-            //print(textField.text)
-            newItem.name = textField.text
-            newItem.minutes = 0
-            newItem.seconds = 0
+            newItem.name = self.textField.text
+            newItem.time = 0.0
             self.itemArray.append(newItem)
             self.saveItems()
             
         }
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new item"
-            textField = alertTextField
+            self.textField = alertTextField
         }
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
@@ -75,13 +60,26 @@ class TimerViewController: UIViewController {
     //MARK: - Timer Methods
     
     @IBAction func timeButtonPressed(_ sender: UIButton) {
+        
         if timerEnable == false{
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
-            timerButton.setTitle("Stop", for: .normal)
+            
+            clickedDate = Date()
+            
+            let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: clickedDate)
+
+            print("clicked date: hour: \(components.hour!), minute: \(components.minute!), seconds: \(components.second!)")
             timerEnable = true
+            performSegue(withIdentifier: "goToTimer", sender: self)
         }else{
-            timerButton.setTitle("Start", for: .normal)
             timer.invalidate()
+            let rightNow = Date()
+            let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: rightNow)
+            
+            print("clicked date: hour: \(components.hour!), minute: \(components.minute!), seconds: \(components.second!)")
+            
+            let timePeriod = calendar.dateComponents([.second], from: clickedDate, to: rightNow)
+            
+            print(timePeriod.second!)
             timerEnable = false
         }
     }
@@ -107,6 +105,15 @@ class TimerViewController: UIViewController {
         itemPicker.reloadAllComponents()
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToTimer"{
+            let destinationVC = segue.destination as! FocusViewController
+            let index = itemPicker.selectedRow(inComponent: 0)
+            destinationVC.targetString = itemArray[index].name
+            destinationVC.clickedDate = self.clickedDate
+        }
+    }
 }
     
 //MARK: - UIPickerView Methods
@@ -123,7 +130,6 @@ extension TimerViewController: UIPickerViewDelegate, UIPickerViewDataSource{
 //        return itemArray[row]
 //    }
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-
         var label:UILabel
         
         if let v = view as? UILabel{
@@ -135,7 +141,6 @@ extension TimerViewController: UIPickerViewDelegate, UIPickerViewDataSource{
         label.textAlignment = .center
         label.font = UIFont(name: "Helvetica", size: 25)
         label.text = itemArray[row].name
-        //print(itemArray[row].name)
         return label
     }
 }

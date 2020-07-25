@@ -16,6 +16,8 @@
 		F832418424C73F61008FA316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F832418324C73F61008FA316 /* Assets.xcassets */; };
 		F832418724C73F61008FA316 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F832418524C73F61008FA316 /* LaunchScreen.storyboard */; };
 		F832418F24C74117008FA316 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F832418E24C74117008FA316 /* TimerViewController.swift */; };
+		F84F0C6D24CAB7E8007C898B /* TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84F0C6C24CAB7E8007C898B /* TimePeriod.swift */; };
+		F8ADA1F324CB065000E7D4A1 /* FocusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ADA1F224CB065000E7D4A1 /* FocusViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		F832418624C73F61008FA316 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F832418824C73F61008FA316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F832418E24C74117008FA316 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		F84F0C6C24CAB7E8007C898B /* TimePeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePeriod.swift; sourceTree = "<group>"; };
+		F8ADA1F224CB065000E7D4A1 /* FocusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				F832418E24C74117008FA316 /* TimerViewController.swift */,
+				F8ADA1F224CB065000E7D4A1 /* FocusViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				F82E649324C88BB600275E3B /* UserData.xcdatamodeld */,
+				F84F0C6C24CAB7E8007C898B /* TimePeriod.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -221,8 +227,10 @@
 				F82E649524C88BB600275E3B /* UserData.xcdatamodeld in Sources */,
 				F832418F24C74117008FA316 /* TimerViewController.swift in Sources */,
 				F832418224C73F5F008FA316 /* Focus_ios.xcdatamodeld in Sources */,
+				F8ADA1F324CB065000E7D4A1 /* FocusViewController.swift in Sources */,
 				F832417824C73F5F008FA316 /* AppDelegate.swift in Sources */,
 				F832417A24C73F5F008FA316 /* SceneDelegate.swift in Sources */,
+				F84F0C6D24CAB7E8007C898B /* TimePeriod.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
